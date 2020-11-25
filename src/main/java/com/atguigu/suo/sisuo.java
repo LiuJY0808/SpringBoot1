@@ -29,6 +29,15 @@ public class sisuo {
                 }
             }
         },"B").start();
+        new Thread(()->{
+            synchronized (objectB){
+                System.out.println(Thread.currentThread().getName() + "自己有准备获取A");
+                try{ TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); }
+                synchronized (objectA){
+                    System.out.println("-------------A线程,成功抢到B");
+                }
+            }
+        },"B").start();
     }
 }
 //
